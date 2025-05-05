@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Penjualan Album K-Pop NCT Dream</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #e6f0ff);
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff3399;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .price {
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #ff3399;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #cc0066;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #d9f2d9;
+      color: #2d662d;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Pemesanan Album NCT Dream</h2>
+  <form id="orderForm">
+    <label for="name">Nama Pembeli:</label>
+    <input type="text" id="name" required>
+
+    <label for="phone">Nomor Telepon:</label>
+    <input type="tel" id="phone" required>
+
+    <label for="product">Pilih Album:</label>
+    <select id="product" required onchange="updatePrice()">
+      <option value="">-- Pilih Produk --</option>
+      <option value="Hello Future - 200000">Hello Future - Rp 200.000</option>
+      <option value="Candy - 220000">Candy - Rp 220.000</option>
+      <option value="ISTJ - 230000">ISTJ - Rp 230.000</option>
+      <option value="Hello Future + Totebag - 340000">Hello Future + Totebag - Rp 340.000</option>
+    </select>
+
+    <div class="price" id="priceLabel">Harga: -</div>
+
+    <button type="submit">Pesan Sekarang</button>
+
+    <div class="result" id="successBox">
+      ✅ Pesanan berhasil! Estimasi produk tiba dalam 3–5 hari kerja.
+    </div>
+  </form>
+</div>
+
+<script>
+  function updatePrice() {
+    const productSelect = document.getElementById("product");
+    const priceLabel = document.getElementById("priceLabel");
+    const selected = productSelect.value;
+
+    if (selected) {
+      const price = selected.split(' - ')[1];
+      priceLabel.textContent = "Harga: Rp " + parseInt(price).toLocaleString();
+    } else {
+      priceLabel.textContent = "Harga: -";
+    }
+  }
+
+  document.getElementById("orderForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Validasi & tampilan pesan sukses
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const product = document.getElementById("product").value;
+
+    if (name && phone && product) {
+      document.getElementById("successBox").style.display = "block";
+    }
+  });
+</script>
+
+</body>
+</html>
